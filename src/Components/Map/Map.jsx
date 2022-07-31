@@ -5,22 +5,25 @@ import { Paper, Typography, useMediaQuery } from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import useStyles from './style';
 
-const Map = () => {
+const Map = ({ coords, setCoords, setBounds }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(min-width: 768px)');
-  const coordinates = { lat: 33, lng: 11 };
 
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_KEY }}
-        defaultCenter={coordinates}
-        center={coordinates}
+        defaultCenter={coords}
+        center={coords}
         defaultZoom={14}
         marging={[50, 50, 50, 50]}
-        options=""
-        onChange=""
-        onChildClick=""
+        options={''}
+        onChange={e => {
+          console.log(e);
+          setCoords({ lat: e.center.lat, lng: e.center.lng });
+          setBounds({ ne: e.margingBounds.ne, sw: e.margingBounds.sw });
+        }}
+        onChildClick={''}
       ></GoogleMapReact>
     </div>
   );
