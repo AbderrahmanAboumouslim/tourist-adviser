@@ -11,18 +11,10 @@ import {
 import useStyles from './style';
 import Details from '../Details/Details';
 
-const List = () => {
+const List = ({ places }) => {
   const classes = useStyles();
   const [type, setType] = useState('hotels');
   const [rate, setRate] = useState('');
-  const places = [
-    { name: 'Morocco shwaya' },
-    { name: 'Tajine maghribi' },
-    { name: 'Ultra hotel' },
-    { name: 'Morocco shwaya' },
-    { name: 'Tajine maghribi' },
-    { name: 'Ultra hotel' },
-  ];
 
   return (
     <div className={classes.container}>
