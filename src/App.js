@@ -10,15 +10,22 @@ import { fetchPlaces } from './Fetch';
 
 const App = () => {
   const [places, setPlaces] = useState();
-  const [coords, setCoords] = useState({ lat: 33, lng: 22 });
-  const [bounds, setBounds] = useState(null);
+  const [coords, setCoords] = useState({});
+  const [bounds, setBounds] = useState({});
 
   useEffect(() => {
-    fetchPlaces().then(data => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoords({ lat: latitude, lng: longitude });
+      }
+    );
+  }, []);
+  useEffect(() => {
+    fetchPlaces(bounds.ne, bounds.sw).then(data => {
       console.log(data);
       setPlaces(data);
     });
-  }, []);
+  }, [bounds, coords]);
   return (
     <>
       <CssBaseline />
