@@ -9,7 +9,7 @@ import { CssBaseline, Grid } from '@material-ui/core';
 import { fetchPlaces } from './Fetch';
 
 const App = () => {
-  const [places, setPlaces] = useState();
+  const [places, setPlaces] = useState([]);
   const [coords, setCoords] = useState({});
   const [bounds, setBounds] = useState({});
 
