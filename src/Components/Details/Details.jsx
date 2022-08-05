@@ -71,9 +71,9 @@ const Details = ({ place }) => {
             gutterBottom
             variant="subtitle2"
             color="textSecondary"
-            className={classes.subtitle}
+            className={classes.spacing}
           >
-            <LocationOnIcon /> {place.phone}
+            <PhoneIcon /> {place.phone}
           </Typography>
         )}
       </CardContent>
