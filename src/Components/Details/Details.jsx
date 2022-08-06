@@ -76,6 +76,16 @@ const Details = ({ place }) => {
             <PhoneIcon /> {place.phone}
           </Typography>
         )}
+
+        <CardActions>
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => window.open(place.website, '_blank')}
+          >
+            Website
+          </Button>
+        </CardActions>
       </CardContent>
     </Card>
   );
