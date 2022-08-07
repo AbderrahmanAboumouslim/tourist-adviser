@@ -32,9 +32,9 @@ const Details = ({ place }) => {
           {place.name ? place.name : 'N/A'}
         </Typography>
         <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="subtitle1">Rating</Typography>
+          <Rating value={Number(place.rating)} readOnly />
           <Typography gutterBottom variant="subtitle1">
-            {place.rating}
+            Out of {place.num_reviews ? place.num_reviews : '0'} reviews
           </Typography>
         </Box>
         <Box style={{ display: 'flex', justifyContent: 'space-between' }}>
