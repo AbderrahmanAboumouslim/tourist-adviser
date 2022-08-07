@@ -5,7 +5,7 @@ import { Paper, Typography, useMediaQuery } from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import useStyles from './style';
 
-const Map = ({ coords, setCoords, setBounds }) => {
+const Map = ({ coords, setCoords, setBounds, places }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(min-width: 768px)');
 
@@ -24,7 +24,17 @@ const Map = ({ coords, setCoords, setBounds }) => {
           setBounds({ ne: e.bounds.ne, sw: e.bounds.sw });
         }}
         onChildClick={''}
-      ></GoogleMapReact>
+      >
+        {places?.map((place, i) => (
+          <div
+            className={classes.markerContainer}
+            lat={Number(place.latitude)}
+            lng={Number(place.longitude)}
+          >
+            {place.name}
+          </div>
+        ))}
+      </GoogleMapReact>
     </div>
   );
 };

@@ -22,10 +22,9 @@ const App = () => {
   }, []);
   useEffect(() => {
     fetchPlaces(bounds.ne, bounds.sw).then(data => {
-      setPlaces(data);
+      setPlaces(data.data);
       console.log(data);
-
-      console.log(places.data);
+      console.log(data.data);
     });
   }, [bounds, coords]);
   return (
@@ -38,7 +37,12 @@ const App = () => {
         </Grid>
 
         <Grid item xs={12} md={8}>
-          <Map setCoords={setCoords} setBounds={setBounds} coords={coords} />
+          <Map
+            setCoords={setCoords}
+            setBounds={setBounds}
+            coords={coords}
+            places={places}
+          />
         </Grid>
       </Grid>
     </>
