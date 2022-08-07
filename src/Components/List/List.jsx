@@ -16,6 +16,8 @@ const List = ({ places }) => {
   const [type, setType] = useState('hotels');
   const [rate, setRate] = useState('');
 
+  console.log(places);
+
   return (
     <div className={classes.container}>
       <Typography variant="h4">Hotels, Restaurants and Attractions</Typography>

@@ -23,8 +23,6 @@ const App = () => {
   useEffect(() => {
     fetchPlaces(bounds.ne, bounds.sw).then(data => {
       setPlaces(data.data);
-      console.log(data);
-      console.log(data.data);
     });
   }, [bounds, coords]);
   return (
@@ -33,7 +31,7 @@ const App = () => {
       <Head />
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
-          <List places={places?.data} />
+          <List places={places} />
         </Grid>
 
         <Grid item xs={12} md={8}>

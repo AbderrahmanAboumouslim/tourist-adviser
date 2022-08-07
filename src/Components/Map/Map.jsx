@@ -1,9 +1,12 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import Rating from '@material-ui/lab';
+import { Rating } from '@material-ui/lab';
 import { Paper, Typography, useMediaQuery } from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import useStyles from './style';
+
+const altImg =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRfpZB0_3qGRT0vx7Jlw662goIgQc9en4esg&usqp=CAU';
 
 const Map = ({ coords, setCoords, setBounds, places }) => {
   const classes = useStyles();
@@ -27,14 +30,23 @@ const Map = ({ coords, setCoords, setBounds, places }) => {
       >
         {places?.map((place, i) => (
           <div
+            key={i}
             className={classes.markerContainer}
-            lat={Number(place.latitude)}
-            lng={Number(place.longitude)}
+            lat={place.latitude}
+            lng={place.longitude}
           >
             {isMobile ? (
               <LocationOnOutlinedIcon color="secondary" fontSize="large" />
             ) : (
-              'later'
+              <Paper elevation={3} className={classes.paper}>
+                <Typography variant="subtitle2">{place.name}</Typography>
+                <img
+                  className={classes.pointer}
+                  src={place.photo ? place.photo.images.large.url : altImg}
+                  alt={place.name}
+                />
+                <Rating size="small" value={Number(place.rating)} readOnly />
+              </Paper>
             )}
           </div>
         ))}
