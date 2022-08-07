@@ -7,7 +7,7 @@ import useStyles from './style';
 
 const Map = ({ coords, setCoords, setBounds, places }) => {
   const classes = useStyles();
-  const isMobile = useMediaQuery('(min-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div className={classes.mapContainer}>
@@ -31,7 +31,11 @@ const Map = ({ coords, setCoords, setBounds, places }) => {
             lat={Number(place.latitude)}
             lng={Number(place.longitude)}
           >
-            {place.name}
+            {isMobile ? (
+              <LocationOnOutlinedIcon color="secondary" fontSize="large" />
+            ) : (
+              'later'
+            )}
           </div>
         ))}
       </GoogleMapReact>
