@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
 import {
   CircularProgress,
   Grid,
@@ -11,12 +11,22 @@ import {
 import useStyles from './style';
 import Details from '../Details/Details';
 
-const List = ({ places }) => {
+const List = ({ places, placeClicked }) => {
   const classes = useStyles();
   const [type, setType] = useState('hotels');
   const [rate, setRate] = useState('');
+  const [theRefs, setTheRefs] = useState([]);
+
+  useEffect(() => {
+    const refs = Array(places.length)
+      .fill()
+      .map((_, i) => theRefs[i] || createRef());
+
+    setTheRefs(refs);
+  }, [places]);
 
   console.log(places);
+  console.log(placeClicked);
 
   return (
     <div className={classes.container}>
@@ -41,8 +51,12 @@ const List = ({ places }) => {
 
       <Grid container spacing={3} className={classes.list}>
         {places?.map((place, i) => (
-          <Grid item key={i} xs={12}>
-            <Details place={place} />
+          <Grid item key={i} xs={12} ref={theRefs[i]}>
+            <Details
+              place={place}
+              selected={Number(placeClicked) === i}
+              refProp={theRefs[i]}
+            />
           </Grid>
         ))}
       </Grid>

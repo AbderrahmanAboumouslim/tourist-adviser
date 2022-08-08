@@ -18,8 +18,12 @@ import useStyles from './style';
 const altImg =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRfpZB0_3qGRT0vx7Jlw662goIgQc9en4esg&usqp=CAU';
 
-const Details = ({ place }) => {
+const Details = ({ place, selected, refProp }) => {
   const classes = useStyles();
+
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   return (
     <Card elevation={6}>
       <CardMedia
@@ -50,7 +54,7 @@ const Details = ({ place }) => {
           </Typography>
         </Box>
         {place?.awards?.map((award, i) => (
-          <Box my={1} display="flex" justifyContent="space-between">
+          <Box key={i} my={1} display="flex" justifyContent="space-between">
             <img src={award?.images?.small} alt="award" />
             <Typography variant="subtitle2" color="textSecondary">
               {award.display_name}

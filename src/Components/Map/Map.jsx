@@ -8,7 +8,7 @@ import useStyles from './style';
 const altImg =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRfpZB0_3qGRT0vx7Jlw662goIgQc9en4esg&usqp=CAU';
 
-const Map = ({ coords, setCoords, setBounds, places }) => {
+const Map = ({ coords, setCoords, setBounds, places, setPlaceClicked }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -26,7 +26,7 @@ const Map = ({ coords, setCoords, setBounds, places }) => {
           setCoords({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.bounds.ne, sw: e.bounds.sw });
         }}
-        onChildClick={''}
+        onChildClick={child => setPlaceClicked(child)}
       >
         {places?.map((place, i) => (
           <div
