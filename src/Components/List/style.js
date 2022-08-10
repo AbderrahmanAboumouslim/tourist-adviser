@@ -10,7 +10,7 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(2),
   },
   loading: {
-    height: '600px',
+    height: '400px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

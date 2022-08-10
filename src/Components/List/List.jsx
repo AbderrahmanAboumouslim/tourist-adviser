@@ -11,14 +11,20 @@ import {
 import useStyles from './style';
 import Details from '../Details/Details';
 
-const List = ({ places, placeClicked, isLoading }) => {
+const List = ({
+  places,
+  placeClicked,
+  isLoading,
+  type,
+  setType,
+  rate,
+  setRate,
+}) => {
   const classes = useStyles();
-  const [type, setType] = useState('hotels');
-  const [rate, setRate] = useState('');
   const [theRefs, setTheRefs] = useState([]);
 
   useEffect(() => {
-    const refs = Array(places.length)
+    const refs = Array(places?.length)
       .fill()
       .map((_, i) => theRefs[i] || createRef());
     console.log(refs);
@@ -31,11 +37,12 @@ const List = ({ places, placeClicked, isLoading }) => {
   return (
     <div className={classes.container}>
       <Typography variant="h4">Hotels, Restaurants and Attractions</Typography>
+
       <FormControl className={classes.formControl}>
         <InputLabel>Type</InputLabel>
         <Select value={type} onChange={e => setType(e.target.value)}>
           <MenuItem value="hotels">Hotels</MenuItem>
-          <MenuItem value="resturants">Resturants</MenuItem>
+          <MenuItem value="restaurants">Restaurants</MenuItem>
           <MenuItem value="attractions">Attractions</MenuItem>
         </Select>
       </FormControl>
@@ -49,21 +56,25 @@ const List = ({ places, placeClicked, isLoading }) => {
         </Select>
       </FormControl>
 
-      <Grid container spacing={3} className={classes.list}>
-        {places?.map((place, i) => (
-          <Grid item key={i} xs={12} ref={theRefs[i]}>
-            {isLoading ? (
-              <CircularProgress color="secondary" />
-            ) : (
-              <Details
-                place={place}
-                selected={Number(placeClicked) === i}
-                refProp={theRefs[i]}
-              />
-            )}
+      {isLoading ? (
+        <div className={classes.loading}>
+          <CircularProgress size="5rem" color="secondary" />
+        </div>
+      ) : (
+        <>
+          <Grid container spacing={3} className={classes.list}>
+            {places?.map((place, i) => (
+              <Grid item key={i} xs={12} ref={theRefs[i]}>
+                <Details
+                  place={place}
+                  selected={Number(placeClicked) === i}
+                  refProp={theRefs[i]}
+                />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </>
+      )}
     </div>
   );
 };
