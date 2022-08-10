@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import Head from './Components/Head/Head';
 import List from './Components/List/List';
 import Map from './Components/Map/Map';
-
 import { CssBaseline, Grid } from '@material-ui/core';
-
 import { fetchPlaces } from './Fetch';
 
 const App = () => {
@@ -30,6 +27,7 @@ const App = () => {
     setIsLoading(true);
     fetchPlaces(type, bounds.ne, bounds.sw).then(data => {
       setPlaces(data.data);
+      setFilteredArea([]);
       setIsLoading(false);
     });
   }, [type, bounds, coords]);
