@@ -16,6 +16,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState('hotels');
   const [rate, setRate] = useState('');
+  const [filteredArea, setFilteredArea] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -32,6 +33,14 @@ const App = () => {
       setIsLoading(false);
     });
   }, [type, bounds, coords]);
+
+  useEffect(() => {
+    const filtered = places.filter(
+      place => Number(place.rating) >= Number(rate)
+    );
+    setFilteredArea(filtered);
+  }, [rate]);
+
   return (
     <>
       <CssBaseline />
@@ -39,7 +48,7 @@ const App = () => {
       <Grid container spacing={3} style={{ width: '100%' }}>
         <Grid item xs={12} md={4}>
           <List
-            places={places}
+            places={filteredArea.length > 0 ? filteredArea : places}
             placeClicked={placeClicked}
             isLoading={isLoading}
             type={type}
@@ -54,7 +63,7 @@ const App = () => {
             setCoords={setCoords}
             setBounds={setBounds}
             coords={coords}
-            places={places}
+            places={filteredArea.length > 0 ? filteredArea : places}
             setPlaceClicked={setPlaceClicked}
           />
         </Grid>
