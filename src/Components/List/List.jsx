@@ -11,7 +11,7 @@ import {
 import useStyles from './style';
 import Details from '../Details/Details';
 
-const List = ({ places, placeClicked }) => {
+const List = ({ places, placeClicked, isLoading }) => {
   const classes = useStyles();
   const [type, setType] = useState('hotels');
   const [rate, setRate] = useState('');
@@ -52,11 +52,15 @@ const List = ({ places, placeClicked }) => {
       <Grid container spacing={3} className={classes.list}>
         {places?.map((place, i) => (
           <Grid item key={i} xs={12} ref={theRefs[i]}>
-            <Details
-              place={place}
-              selected={Number(placeClicked) === i}
-              refProp={theRefs[i]}
-            />
+            {isLoading ? (
+              <CircularProgress color="secondary" />
+            ) : (
+              <Details
+                place={place}
+                selected={Number(placeClicked) === i}
+                refProp={theRefs[i]}
+              />
+            )}
           </Grid>
         ))}
       </Grid>
