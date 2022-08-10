@@ -13,7 +13,7 @@ export const fetchPlaces = async (ne, sw) => {
         tr_longitude: ne.lng,
       },
       headers: {
-        'X-RapidAPI-Key': process.env.REACT_APP_TRAVEL_ADVISER_KEY,
+        'X-RapidAPI-Key': process.env.REACT_APP_TRAVEL_ADVISER_API_KEY,
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
       },
     });

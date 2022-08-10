@@ -21,7 +21,7 @@ const List = ({ places, placeClicked }) => {
     const refs = Array(places.length)
       .fill()
       .map((_, i) => theRefs[i] || createRef());
-
+    console.log(refs);
     setTheRefs(refs);
   }, [places]);
 
