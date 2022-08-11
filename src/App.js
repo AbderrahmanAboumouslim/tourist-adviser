@@ -37,7 +37,7 @@ const App = () => {
       place => Number(place.rating) >= Number(rate)
     );
     setFilteredArea(filtered);
-  }, [rate]);
+  }, [places, rate]);
 
   return (
     <>
