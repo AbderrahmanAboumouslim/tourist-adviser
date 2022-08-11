@@ -4,6 +4,7 @@ import Rating from '@material-ui/lab/Rating';
 import { Paper, Typography, useMediaQuery } from '@material-ui/core';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import useStyles from './style';
+import mapStylish from './mapStylish';
 
 const altImg =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRfpZB0_3qGRT0vx7Jlw662goIgQc9en4esg&usqp=CAU';
@@ -20,7 +21,11 @@ const Map = ({ coords, setCoords, setBounds, places, setPlaceClicked }) => {
         center={coords}
         defaultZoom={14}
         marging={[50, 50, 50, 50]}
-        options={''}
+        options={{
+          disableDefaultUI: true,
+          zoomControl: true,
+          styles: mapStylish,
+        }}
         onChange={e => {
           console.log(e);
           setCoords({ lat: e.center.lat, lng: e.center.lng });
