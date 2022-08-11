@@ -19,7 +19,7 @@ export default makeStyles(theme => ({
     padding: '24px',
   },
   marginBottom: {
-    marginBottom: '30px',
+    marginBottom: '29px',
   },
   list: {
     height: '75vh',
